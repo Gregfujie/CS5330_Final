@@ -99,6 +99,14 @@ def generate_prompt_from_labels(keep_labels: List[int], remove_labels: List[int]
 
 
 def square_padding(image, mask=None):
+    """
+    Pads the image and mask to make them square.
+    Args:
+        image (PIL.Image): The input image.
+        mask (np.ndarray, optional): The binary mask to be padded. Defaults to None.
+    Returns:
+        Tuple[PIL.Image, np.ndarray]: The padded image and mask.
+    """
     image_np = np.array(image)
     height, weight = image_np.shape[:2]
     canvas_size = max(height, weight)
@@ -116,6 +124,14 @@ def square_padding(image, mask=None):
     return Image.fromarray(canvas), padded_mask if mask is not None else None
 
 def padded2normal(raw_image, padded_image):
+    """
+    Resizes the padded image to match the original image size.
+    Args:
+        raw_image (PIL.Image): The original image.
+        padded_image (PIL.Image): The padded image.
+    Returns:
+        PIL.Image: The resized image.
+    """
     raw_np = np.array(raw_image)
     padded_np = np.array(padded_image)
 
